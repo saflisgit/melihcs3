@@ -6,7 +6,7 @@ import com.lagradost.cloudstream3.TvType
 
 class ExampleProvider : MainAPI() { // All providers must be an instance of MainAPI
     override var mainUrl = "https://example.com/" 
-    override var name = "Example provider"
+    override var name = "Example provider Test"
     override val supportedTypes = setOf(TvType.Movie)
 
     override var lang = "en"
