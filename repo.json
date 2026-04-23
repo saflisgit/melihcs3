@@ -1,0 +1,8 @@
+{
+    "name": "lattemanifest",
+    "description": "babayaro",
+    "manifestVersion": 1,
+    "pluginLists": [
+        "https://raw.githubusercontent.com/saflisgit/melihcs3/refs/heads/builds/plugins.json"
+    ]
+}
