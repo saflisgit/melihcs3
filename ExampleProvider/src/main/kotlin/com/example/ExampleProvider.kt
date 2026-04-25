@@ -12,7 +12,11 @@ import com.lagradost.cloudstream3.newHomePageResponse
 import com.lagradost.cloudstream3.syncproviders.providers.OpenSubtitlesApi.Companion.headers
 import com.lagradost.cloudstream3.app
 import com.lagradost.cloudstream3.newMovieSearchResponse
-
+import com.lagradost.cloudstream3.LoadResponse
+import com.lagradost.cloudstream3.newMovieLoadResponse
+import com.lagradost.cloudstream3.SubtitleFile
+import com.lagradost.cloudstream3.utils.ExtractorLink
+import com.lagradost.cloudstream3.utils.loadExtractor
 class ExampleProvider : MainAPI() { 
     override var mainUrl = "https://filmmakinesi.to"
     override var name = "Film Makinesi"
@@ -45,16 +49,16 @@ class ExampleProvider : MainAPI() {
         
         val doc = app.get(url).document
         
-        // Use generic selectors that are common on movie sites, or specific ones if known
-        val elements = doc.select("div.poster, div.movie-poster, div.movie-box, article, .item, .post, .movie")
+        // Vizyondakileri atlayıp sadece "Son Eklenenler" (Son Filmler) kısmındaki filmleri çekmek için
+        val elements = doc.select("div.item-relative")
         
         val home = elements.mapNotNull { element ->
-            val a = element.selectFirst("a") ?: return@mapNotNull null
+            val a = element.selectFirst("a.item") ?: return@mapNotNull null
             val href = a.attr("href")
             if (href.isEmpty() || href == "#") return@mapNotNull null
             
             val img = element.selectFirst("img")
-            val title = img?.attr("alt")?.ifEmpty { img.attr("title") } ?: a.attr("title").ifEmpty { a.text() }
+            val title = a.attr("data-title").ifEmpty { img?.attr("alt") }?.ifEmpty { img?.attr("title") } ?: a.attr("title").ifEmpty { a.text() }
             val posterUrl = img?.attr("data-src")?.ifEmpty { img.attr("src") }
             
             if (title.isBlank()) return@mapNotNull null
@@ -65,5 +69,36 @@ class ExampleProvider : MainAPI() {
         }.distinctBy { it.url }
 
         return newHomePageResponse(request.name, home)
+    }
+
+    override suspend fun load(url: String): LoadResponse? {
+        val doc = app.get(url).document
+        
+        val title = doc.selectFirst("h1")?.text() ?: doc.selectFirst("meta[property=og:title]")?.attr("content") ?: ""
+        val poster = doc.selectFirst("meta[property=og:image]")?.attr("content")
+        val plot = doc.selectFirst("meta[property=og:description]")?.attr("content")
+        
+        return newMovieLoadResponse(title, url, TvType.Movie, url) {
+            this.posterUrl = poster
+            this.plot = plot
+        }
+    }
+
+    override suspend fun loadLinks(
+        data: String,
+        isCasting: Boolean,
+        subtitleCallback: (SubtitleFile) -> Unit,
+        callback: (ExtractorLink) -> Unit
+    ): Boolean {
+        val doc = app.get(data).document
+        
+        val iframes = doc.select("iframe").mapNotNull { it.attr("src").ifEmpty { it.attr("data-src") } }
+        
+        iframes.forEach { iframeUrl ->
+            val fixedUrl = if (iframeUrl.startsWith("//")) "https:$iframeUrl" else iframeUrl
+            loadExtractor(fixedUrl, data, subtitleCallback, callback)
+        }
+        
+        return true
     }
 }
