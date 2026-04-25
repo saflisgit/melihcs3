@@ -10,6 +10,8 @@ import com.lagradost.cloudstream3.mainPageOf
 import com.lagradost.cloudstream3.newAnimeSearchResponse
 import com.lagradost.cloudstream3.newHomePageResponse
 import com.lagradost.cloudstream3.syncproviders.providers.OpenSubtitlesApi.Companion.headers
+import com.lagradost.cloudstream3.app
+import com.lagradost.cloudstream3.newMovieSearchResponse
 
 class ExampleProvider : MainAPI() { 
     override var mainUrl = "https://filmmakinesi.to"
@@ -57,7 +59,7 @@ class ExampleProvider : MainAPI() {
             
             if (title.isBlank()) return@mapNotNull null
             
-            com.lagradost.cloudstream3.newMovieSearchResponse(title, href, TvType.Movie) {
+            newMovieSearchResponse(title, href, TvType.Movie) {
                 this.posterUrl = posterUrl
             }
         }.distinctBy { it.url }
