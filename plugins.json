@@ -1,22 +1,24 @@
 [
     {
-        "iconUrl": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Korduene_Logo.png",
-        "fileHash": "sha256-5fd4ae501ac2b237b5c7b39a865f0ec5c8718d1a7d88e66c1048bd486db38924",
-        "apiVersion": 1,
-        "repositoryUrl": "https://github.com/saflisgit/melihcs3",
-        "fileSize": 14508,
-        "status": 1,
-        "language": "en",
-        "authors": [
-            "melih"
-        ],
-        "tvTypes": [
-            "Movie"
-        ],
-        "version": 1,
-        "internalName": "ExampleProvider",
-        "description": "Lorem ipsum",
-        "url": "https://raw.githubusercontent.com/saflisgit/melihcs3/builds/ExampleProvider.cs3",
-        "name": "ExampleProvider"
+        "iconUrl":  "https://www.google.com/s2/favicons?domain=dizipal1586.com\u0026sz=%size%",
+        "fileHash":  "sha256-1e22fdae94d7dc422e22fc3c07acfec47d0f1fdc793887a3e623b686fed21e6a",
+        "apiVersion":  1,
+        "repositoryUrl":  "https://github.com/keyiflerolsun/Kekik-cloudstream",
+        "fileSize":  33054,
+        "status":  1,
+        "language":  "tr",
+        "authors":  [
+                        "keyiflerolsun",
+                        "muratcesmecioglu"
+                    ],
+        "tvTypes":  [
+                        "TvSeries",
+                        "Movie"
+                    ],
+        "version":  33,
+        "internalName":  "DiziPal",
+        "description":  "en yeni dizileri güvenli ve hızlı şekilde sunar.",
+        "url":  "https://raw.githubusercontent.com/saflisgit/melihcs3/builds/DiziPal.cs3",
+        "name":  "DiziPal"
     }
 ]
