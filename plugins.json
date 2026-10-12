@@ -43,5 +43,25 @@
         "description":  "İnatBox cloudstream eklentisidir. Sevdiğiniz yayın platformlarını ve canlı maçları burada bulabilirsiniz.",
         "url":  "https://raw.githubusercontent.com/saflisgit/melihcs3/builds/InatBox.cs3",
         "name":  "InatBox"
+    },
+    {
+        "iconUrl":  "https://www.selcuksportshd.is/assets/images/favicon.png",
+        "fileHash":  "sha256-e992d034e9beb2863f94ba86eb92c0bd41cde120679394de432d0850a758658d",
+        "apiVersion":  1,
+        "repositoryUrl":  "https://github.com/keyiflerolsun/Kekik-cloudstream",
+        "fileSize":  17150,
+        "status":  1,
+        "language":  "tr",
+        "authors":  [
+                        "keyiflerolsun"
+                    ],
+        "tvTypes":  [
+                        "Live"
+                    ],
+        "version":  1,
+        "internalName":  "SelcukSports",
+        "description":  "Selçuk Sports canlı maçları: futbol, basketbol ve tenis. Güncel giriş adresi otomatik bulunur.",
+        "url":  "https://raw.githubusercontent.com/saflisgit/melihcs3/builds/SelcukSports.cs3",
+        "name":  "SelcukSports"
     }
 ]
